@@ -104,6 +104,38 @@ class APIManager {
 
         task.resume()
     }
+    
+    // MARK: - function to get random meal recipe
+    
+    func fetchRandomMeal(completion: @escaping (Result<Meal, Error>) -> Void) {
+            let urlString = "https://www.themealdb.com/api/json/v1/1/random.php"
+            
+            guard let url = URL(string: urlString) else {
+                completion(.failure(NSError(domain: "Invalid URL", code: -1, userInfo: nil)))
+                return
+            }
+            
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let response = try decoder.decode(MealData.self, from: data ?? Data())
+                    if let meal = response.meals.first {
+                        completion(.success(meal))
+                    } else {
+                        completion(.failure(NSError(domain: "No meal found", code: -1, userInfo: nil)))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            
+            task.resume()
+        }
 
     
     // MARK: - function to load the meal pictures 
