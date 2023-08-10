@@ -9,15 +9,19 @@ import UIKit
 
 class ListByCategoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
    
-    
-
     var selectedCategory: Category?
     var SelecedCategoryMeals:[Meal] = []
-    
+    var selectedMeal: Meal?
     @IBOutlet weak var MealTableView: UITableView!
+    let activityIndicator = UIActivityIndicatorView(style: .large)
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = Colors.BackgroundColor
+        
+        MealTableView.backgroundColor = Colors.BackgroundColor
         
         MealTableView.dataSource = self
         MealTableView.delegate = self
@@ -32,7 +36,11 @@ class ListByCategoryViewController: UIViewController, UITableViewDataSource, UIT
             switch result {
             case .success(let CategoryMeal):
                 self.SelecedCategoryMeals = CategoryMeal
-                print(self.SelecedCategoryMeals.count)
+                
+                self.SelecedCategoryMeals.forEach {meal in
+                    print( meal.strMeal)
+                }
+               
                 DispatchQueue.main.async {
                     self.MealTableView.reloadData()
                 }
@@ -41,6 +49,10 @@ class ListByCategoryViewController: UIViewController, UITableViewDataSource, UIT
                 // Handle the error appropriately.
             }
         }
+        
+       
+                
+                
             }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,7 +63,9 @@ class ListByCategoryViewController: UIViewController, UITableViewDataSource, UIT
         
         let cell = MealTableView.dequeueReusableCell(withIdentifier: "SearcByCategoryCell" , for: indexPath) as! ListByCategoryMealTableViewCell
        
+        cell.backgroundColor = Colors.BackgroundColor
         let recipe = SelecedCategoryMeals[indexPath.row]
+        cell.RecipeName.textColor = Colors.BtnAndTextColor
         cell.RecipeName.text = recipe.strMeal
         APIManager.shared.loadImage(from: URL(string: recipe.strMealThumb)!, into: cell.RecipeImg)
 
@@ -64,16 +78,48 @@ class ListByCategoryViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedMeal = SelecedCategoryMeals[indexPath.row]
-        performSegue(withIdentifier: "ShowDetailFromCategory", sender: selectedMeal)
+        let query = SelecedCategoryMeals[indexPath.row].idMeal
+        
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+        
+        // Start activity indicator
+        activityIndicator.startAnimating()
+       
+        activityIndicator.center = view.center
+               activityIndicator.hidesWhenStopped = true
+               view.addSubview(activityIndicator)
+               activityIndicator.startAnimating()
+               
+               getMeal(byId: Int(query)!) { result in
+                   DispatchQueue.main.async {
+                       self.activityIndicator.stopAnimating()
+                       
+                       switch result {
+                       case .success(let meal):
+                           print(meal)
+                           
+                           // If you have the meal object and wish to perform a segue:
+                           self.performSegue(withIdentifier: "ShowDetailFromCategory", sender: meal)
+
+                       case .failure(let error):
+                           print("Error: \(error.localizedDescription)")
+                           // Optionally, present an alert to the user about the error
+                       }
+                   }
+               }
+           
     }
+
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetailFromCategory",
            let destinationVC = segue.destination as? ShowDetailByCategoryViewController,
            let meal = sender as? Meal {
             destinationVC.meal = meal
-           print(meal.strMeal)
+            print(meal.strInstructions)
         }
     
     }

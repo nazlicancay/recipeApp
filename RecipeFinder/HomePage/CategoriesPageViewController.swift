@@ -9,24 +9,22 @@ import UIKit
 
 
 
-class HomePageViewController: UIViewController, UISearchResultsUpdating, UICollectionViewDataSource, UICollectionViewDelegate {
+class CategoriesPageViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
    
     
-    var searchResultViewController: SearchResultViewController?
     private var collectionView : UICollectionView?
     var CategoriesList: [Category] = []
     
     
     override func viewDidLoad() {
+        
+        view.backgroundColor = Colors.BackgroundColor
+       
+        collectionView?.backgroundColor = Colors.BackgroundColor
+       
         super.viewDidLoad()
         title = "Categories"
-        let searchResultViewController = storyboard?.instantiateViewController(withIdentifier: "SearchResultViewControllerIdentifier") as? SearchResultViewController
-        let searchController = UISearchController(searchResultsController: searchResultViewController)
-
-        searchController.searchResultsUpdater = self
-        navigationItem.searchController = searchController
-        
-        APIManager.shared.fetchCategories { (result) in
+     APIManager.shared.fetchCategories { (result) in
             DispatchQueue.main.async {  // Switch to the main thread to update the UI
                 switch result {
                 case .success(let categories):
@@ -62,16 +60,6 @@ class HomePageViewController: UIViewController, UISearchResultsUpdating, UIColle
     }
     
     
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text,
-                 let searchResultViewController = searchController.searchResultsController as? SearchResultViewController else {
-               return
-           }
-            searchResultViewController.searchQuery = text
-            
-        
-           
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         CategoriesList.count
@@ -81,18 +69,20 @@ class HomePageViewController: UIViewController, UISearchResultsUpdating, UIColle
       
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCollectionViewCell.identifier, for: indexPath) as! CategoriesCollectionViewCell
             cell.configure(with: CategoriesList[indexPath.row])
+        cell.backgroundColor = Colors.BackgroundColor
             return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let category = CategoriesList[indexPath.row]
-        // Assuming RecipeViewController is the view controller you want to navigate to
+       
         let listByCategory = ListByCategoryViewController()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)  // replace "Main" with the name of your storyboard if it's different
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
             guard let listByCategoryVC = storyboard.instantiateViewController(withIdentifier: "ListByCategoryViewController") as? ListByCategoryViewController else {
                 fatalError("Failed to instantiate ListByCategoryViewController")
             }
-        listByCategory.selectedCategory = category // Pass the selected category to RecipeViewController
+        listByCategory.selectedCategory = category 
         listByCategoryVC.selectedCategory = category
         navigationController?.pushViewController(listByCategoryVC, animated: true)
     }

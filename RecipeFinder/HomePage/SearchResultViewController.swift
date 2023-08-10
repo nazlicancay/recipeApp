@@ -43,6 +43,9 @@ class SearchResultViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = Colors.BackgroundColor
+        
+        ResultTableView.backgroundColor = Colors.BackgroundColor
         ResultTableView.delegate = self
         ResultTableView.dataSource = self
 
@@ -56,8 +59,11 @@ class SearchResultViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ResultTableView.dequeueReusableCell(withIdentifier: "cell" , for: indexPath) as! ResultTableViewCell
        
+        cell.backgroundColor = Colors.BackgroundColor
         let recipe = MealDataDisplay[indexPath.row]
+        cell.RecipeName.textColor = Colors.BtnAndTextColor
         cell.RecipeName.text = recipe.strMeal
+        
         APIManager.shared.loadImage(from: URL(string: recipe.strMealThumb)!, into: cell.RecipeImg)
 
         return cell

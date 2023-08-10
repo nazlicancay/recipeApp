@@ -12,6 +12,7 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
 
     private let imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.backgroundColor = Colors.BackgroundColor
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
@@ -19,6 +20,8 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
 
     private let label: UILabel = {
         let label = UILabel()
+        label.backgroundColor = Colors.BackgroundColor
+        label.textColor = Colors.BtnAndTextColor
         label.textAlignment = .center
         label.numberOfLines = 0
        
@@ -37,7 +40,7 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.width)
+        imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.width-50)
         let padding: CGFloat = 10.0
         label.frame = CGRect(x: padding, y: imageView.frame.size.height + padding, width: contentView.frame.size.width - 2 * padding, height: contentView.frame.size.height - imageView.frame.size.height - 2 * padding)
     }

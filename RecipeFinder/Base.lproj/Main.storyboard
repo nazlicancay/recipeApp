@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tfX-zR-5W5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tfX-zR-5W5">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,22 +17,28 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6PF-Ep-YzY">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="Color"/>
+                        <color key="tintColor" systemColor="systemBrownColor"/>
+                        <color key="barTintColor" name="Color"/>
+                        <color key="selectedImageTintColor" systemColor="systemBrownColor"/>
                     </tabBar>
                     <connections>
-                        <segue destination="MNa-gO-1tz" kind="relationship" relationship="viewControllers" id="N6K-4J-8Fh"/>
                         <segue destination="UGV-s9-vpf" kind="relationship" relationship="viewControllers" id="sIA-PO-57I"/>
+                        <segue destination="MNa-gO-1tz" kind="relationship" relationship="viewControllers" id="pTN-c9-hBK"/>
+                        <segue destination="b0T-ok-H6A" kind="relationship" relationship="viewControllers" id="tEe-PP-4Le"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5I4-2a-23r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1218" y="-990"/>
         </scene>
-        <!--Item-->
+        <!--HomePage-->
         <scene sceneID="dTp-a5-Mef">
             <objects>
                 <navigationController id="MNa-gO-1tz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="92S-bR-quI"/>
+                    <tabBarItem key="tabBarItem" title="HomePage" id="92S-bR-quI">
+                        <color key="badgeColor" red="0.76079905810000004" green="0.71782782349999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qWe-2R-0DF">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -47,10 +55,10 @@
             </objects>
             <point key="canvasLocation" x="512" y="-256"/>
         </scene>
-        <!--Random Recipe Page View Controller-->
+        <!--Home Page View Controller-->
         <scene sceneID="a9G-zu-iEd">
             <objects>
-                <viewController id="KPE-3Z-qqV" customClass="RandomRecipePageViewController" customModule="RecipeFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KPE-3Z-qqV" customClass="HomePageViewController" customModule="RecipeFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8ev-FA-mc6">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,8 +66,11 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jzh-1u-3Ao">
                                 <rect key="frame" x="109" y="324" width="174" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="secondarySystemBackgroundColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Find A Recipe"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Find A Recipe" cornerStyle="dynamic">
+                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="DisplayRandomRecipe:" destination="KPE-3Z-qqV" eventType="touchUpInside" id="eez-gM-nRZ"/>
                                 </connections>
@@ -68,7 +79,7 @@
                                 <rect key="frame" x="51" y="225" width="290" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -77,12 +88,30 @@
                     </view>
                     <navigationItem key="navigationItem" id="o9W-rT-tdv"/>
                     <connections>
+                        <outlet property="FindRecipeBtn" destination="Jzh-1u-3Ao" id="FnH-Pu-Llo"/>
+                        <outlet property="btnDesc" destination="jAl-KR-heY" id="J3t-eA-e6g"/>
                         <segue destination="t9h-6b-1k4" kind="show" identifier="ShowRandomMealDetail" id="azt-pr-XiC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2La-MT-Stm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3362.5954198473282" y="480.98591549295776"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="lnf-jc-E8W">
+            <objects>
+                <viewController id="CIb-xk-HPf" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Gqg-6U-G1J">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="OB1-49-1AW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="aYs-Ny-Yd3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="maL-Al-j97" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4964" y="481"/>
         </scene>
         <!--List By Category View Controller-->
         <scene sceneID="vlX-Wt-KmG">
@@ -236,6 +265,8 @@
                         <outlet property="MealName" destination="DtA-eu-5OQ" id="ODK-bC-OvZ"/>
                         <outlet property="MealPicture" destination="tzv-ba-b8g" id="ePz-dt-zaC"/>
                         <outlet property="MealRecipe" destination="FJX-Jb-zpa" id="aVu-g1-Jjv"/>
+                        <outlet property="ScrollView" destination="8kG-U9-U5e" id="B7h-Bu-4iA"/>
+                        <outlet property="ScrollViewInside" destination="ypp-up-4d9" id="4F2-Oi-yWB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P2A-eW-F7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -287,7 +318,6 @@
                                         <connections>
                                             <outlet property="RecipeImg" destination="cny-J1-Klp" id="NIu-XB-AOZ"/>
                                             <outlet property="RecipeName" destination="CP0-ba-zCU" id="Fbg-pa-da4"/>
-                                            <segue destination="t9h-6b-1k4" kind="show" identifier="DetailSegue" trigger="accessoryAction" id="26n-OM-Was"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -305,17 +335,18 @@
                     <navigationItem key="navigationItem" id="qj3-sN-dtb"/>
                     <connections>
                         <outlet property="ResultTableView" destination="fH4-xg-tJK" id="dgm-EX-AjV"/>
+                        <segue destination="t9h-6b-1k4" kind="show" identifier="DetailSegue" id="p6p-K3-eeB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4QH-w6-P50" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1217.5572519083969" y="481.69014084507046"/>
         </scene>
-        <!--Item-->
+        <!--Categories-->
         <scene sceneID="MYg-gT-j6O">
             <objects>
                 <navigationController id="UGV-s9-vpf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="cnK-Ve-kZE"/>
+                    <tabBarItem key="tabBarItem" title="Categories" id="cnK-Ve-kZE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PaC-g5-NOV">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -326,12 +357,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zsw-N4-lpd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2024" y="-256"/>
+            <point key="canvasLocation" x="2018" y="-256"/>
         </scene>
-        <!--Home Page View Controller-->
+        <!--Categories-->
         <scene sceneID="NfP-gP-cXe">
             <objects>
-                <viewController id="6Wh-s4-VsF" customClass="HomePageViewController" customModule="RecipeFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Categories" id="6Wh-s4-VsF" customClass="CategoriesPageViewController" customModule="RecipeFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XVV-Ep-pAu">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -460,6 +491,8 @@
                         <outlet property="MealName" destination="OUi-Zb-BRy" id="Fq7-K0-aei"/>
                         <outlet property="MealPicture" destination="fXZ-Bw-dEg" id="tks-3R-bwM"/>
                         <outlet property="MealRecipe" destination="SQR-4N-wW6" id="g5Q-GE-2IQ"/>
+                        <outlet property="ScrollView" destination="hty-Wi-pWT" id="cbe-no-aoW"/>
+                        <outlet property="ScrollViewInside" destination="xvn-c8-Rlc" id="SR7-nG-kRY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P7h-Or-3gq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -469,7 +502,6 @@
         <!--Navigation Controller-->
         <scene sceneID="rh2-yX-KxM">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="T1b-d9-VnN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ffO-Tr-cnZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UKF-Jc-ebx">
@@ -481,16 +513,45 @@
                         <segue destination="Yh3-pG-Wm2" kind="relationship" relationship="rootViewController" id="yWG-er-A8T"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T1b-d9-VnN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2362.5954198473282" y="1303.5211267605634"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="4N8-vM-azb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="b0T-ok-H6A" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="NQw-js-Jdi"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ayD-oP-Xva">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CIb-xk-HPf" kind="relationship" relationship="rootViewController" id="xTY-A6-BZT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SPR-EN-HXV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3595" y="-256"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="26n-OM-Was"/>
+        <segue reference="p6p-K3-eeB"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <namedColor name="Color">
+            <color red="0.89411764705882357" green="0.83921568627450982" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

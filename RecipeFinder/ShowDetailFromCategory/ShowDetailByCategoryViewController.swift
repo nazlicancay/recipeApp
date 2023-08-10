@@ -11,6 +11,9 @@ class ShowDetailByCategoryViewController: UIViewController {
 
     var meal: Meal?
     
+    @IBOutlet weak var ScrollViewInside: UIView!
+    @IBOutlet weak var ScrollView: UIScrollView!
+    
     @IBOutlet weak var MealArea: UILabel!
    
     @IBOutlet weak var MealName: UILabel!
@@ -26,12 +29,25 @@ class ShowDetailByCategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        ScrollViewInside.backgroundColor = Colors.BackgroundColor
+        ScrollView.backgroundColor = Colors.BackgroundColor
+        view.backgroundColor = Colors.BackgroundColor
+        
         if let meal = meal {
+            MealName.textColor = Colors.BtnAndTextColor
             MealName.text = meal.strMeal
+            
             APIManager.shared.loadImage(from: URL(string: meal.strMealThumb)!, into: MealPicture)
+            MealRecipe.textColor = Colors.BtnAndTextColor
             MealRecipe.text = meal.strInstructions
+            
+            Ingredients.textColor = Colors.BtnAndTextColor
             Ingredients.text = APIManager.shared.ingredients.map { "• \($0)" }.joined(separator: "\n")
+            
+            MealCategorie.textColor = Colors.BtnAndTextColor
             MealCategorie.text = meal.strCategory
+            
+            MealArea.textColor = Colors.BtnAndTextColor
             MealArea.text = meal.strArea
            }
     }

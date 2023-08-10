@@ -14,8 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        return true
+        // Change the navigation bar background color
+        UINavigationBar.appearance().barTintColor = Colors.BackgroundColor
+
+               // Change the navigation bar items color
+        UINavigationBar.appearance().tintColor = Colors.BtnAndTextColor
+               // Change the navigation bar title color
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colors.BtnAndTextColor]
+        UINavigationBar.appearance().tintColor = Colors.BtnAndTextColor
+
+
+               return true
     }
 
     // MARK: UISceneSession Lifecycle
