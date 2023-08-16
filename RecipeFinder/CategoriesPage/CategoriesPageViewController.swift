@@ -51,6 +51,7 @@ class CategoriesPageViewController: UIViewController, UICollectionViewDataSource
         }
         collectionView.register(CategoriesCollectionViewCell.self, forCellWithReuseIdentifier: CategoriesCollectionViewCell.identifier)
         
+        collectionView.backgroundColor = Colors.BackgroundColor
         collectionView.dataSource = self
         collectionView.delegate = self
         view.addSubview(collectionView)

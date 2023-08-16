@@ -25,7 +25,6 @@
                     <connections>
                         <segue destination="UGV-s9-vpf" kind="relationship" relationship="viewControllers" id="sIA-PO-57I"/>
                         <segue destination="MNa-gO-1tz" kind="relationship" relationship="viewControllers" id="pTN-c9-hBK"/>
-                        <segue destination="b0T-ok-H6A" kind="relationship" relationship="viewControllers" id="tEe-PP-4Le"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5I4-2a-23r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -517,28 +516,9 @@
             </objects>
             <point key="canvasLocation" x="2362.5954198473282" y="1303.5211267605634"/>
         </scene>
-        <!--Item-->
-        <scene sceneID="4N8-vM-azb">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="b0T-ok-H6A" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="NQw-js-Jdi"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ayD-oP-Xva">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="CIb-xk-HPf" kind="relationship" relationship="rootViewController" id="xTY-A6-BZT"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SPR-EN-HXV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3595" y="-256"/>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="p6p-K3-eeB"/>
+        <segue reference="azt-pr-XiC"/>
     </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="Color">

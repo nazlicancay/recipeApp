@@ -11,9 +11,9 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+       
         // Change the navigation bar background color
         UINavigationBar.appearance().barTintColor = Colors.BackgroundColor
 
@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colors.BtnAndTextColor]
         UINavigationBar.appearance().tintColor = Colors.BtnAndTextColor
 
+        
 
                return true
     }
