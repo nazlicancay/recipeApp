@@ -2,6 +2,6 @@
 
 ## Screenshots
 
-![Screenshot 1](https://github.com/nazlicancay/recipeFinder/blob/main/RecipeFinder/app_img1.png)
+<img src="https://github.com/nazlicancay/recipeFinder/blob/main/RecipeFinder/app_img1.png" width="395" height="900">
 
-![Screenshot 2](https://github.com/nazlicancay/recipeFinder/blob/main/RecipeFinder/App_img2.png)
+<img src="https://github.com/nazlicancay/recipeFinder/blob/main/RecipeFinder/App_img2.png" width="395" height="900">
